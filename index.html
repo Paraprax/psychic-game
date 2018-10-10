@@ -11,7 +11,32 @@
 <body>
     <h1>Do YOU Have ESP?</h1>
 
-    <script></script>
+    <h3>Guess what letter I'm thinking of:</h3>
+
+    <h4 id="wins">Wins:</h4>
+
+    <h4 id="losses">Losses:</h4>
+
+    <h4 id="guessesLeft">Guesses Remaining:</h4>
+
+    <h4 id="guesses">Your Guesses So Far</h4>
+
+
+    <script>
+
+    //array of letters the program will choose from
+    var alphabet = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"]
+    
+    // picks a word from the array via a random index number
+    var letter = alphabet[Math.floor(Math.random() * alphabet.length)];
+
+    // vars keeping track of the number of wins, losses and unused guesses
+    var wins = 0;
+    var losses = 0;
+    var guesses = 9;
+
+
+    </script>
     
 </body>
 </html>
