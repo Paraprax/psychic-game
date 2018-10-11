@@ -17,9 +17,9 @@
 
     <h4>Losses: <span id="losses"></span> </h4>
 
-    <h4>Tries Remaining:<span id="triesLeft"></span> </h4>
+    <h4>Tries Remaining:<span id="guessesLeft"> </span> </h4>
 
-    <h4>Your Guesses So Far: <span id="guessLog"></span></h4>
+    <h4>Your Guesses So Far: <span id="guessLog"> </span></h4>
 
 
     <script>
@@ -33,7 +33,7 @@
         // vars keeping track of the number of wins, losses and unused guesses
         var wins = 0;
         var losses = 0;
-        var guesses = 9;
+        var guessesLeft = 9;
 
         // array for letters already guessed by the user
         var guessedLetters = [ ];
@@ -45,9 +45,13 @@
 
                 guessedLetters.push(" " + guess);
 
-                console.log(guess);
+                guessesLeft--;
 
-                document.getElementById('guessLog').innerHTML = guessedLetters;
+                document.getElementById('wins').innerHTML = wins;
+                document.getElementById('losses').innerHTML = losses;
+                document.getElementById('guessesLeft').innerHTML = (" " + guessesLeft);
+                document.getElementById('guessLog').innerHTML = (" " + guessedLetters);
+                
             }
 
 
