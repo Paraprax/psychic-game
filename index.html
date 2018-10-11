@@ -13,6 +13,8 @@
 
     <h3>Guess what letter I'm thinking of:</h3>
 
+    <button onclick="psychicGame()">Start Game</button>
+
     <h4>Wins: <span id="wins"></span> </h4>
 
     <h4>Losses: <span id="losses"></span> </h4>
@@ -26,11 +28,6 @@
 
         //array of letters the program will choose from
         var alphabet = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"]
-        
-        // picks a letter from the array via a random index number
-        var letter = alphabet[Math.floor(Math.random() * alphabet.length)];
-
-        var secretLetter = letter;
 
         // vars keeping track of the number of wins, losses and unused guesses
         var wins = 0;
@@ -48,50 +45,62 @@
             document.getElementById('guessLog').innerHTML = (" " + guessedLetters);
         }
 
+
+        var letter = alphabet[Math.floor(Math.random() * alphabet.length)];
+
+        var secretLetter = letter;
+
         // function for resetting scores and clearing the guessedLetters array
         function reset () {
             guessesLeft = 9;
             guessedLetters = [];
             scorecard();
         }
-
-
-        // ~~~~ actual game logic begins here ~~~~ 
-
-        reset();
         
-        // main game function triggered by key-up
-        document.onkeyup = function(event) {
+        // function for picking a letter from the array via a random index number
         
-            // var containting the letter on the key pressed
-            var guess = event.key;
 
-            console.log(secretLetter);
+        // ~~~~ actual game function begins here ~~~~ 
+        
+        function psychicGame () {
+
+            // resets the game
+            reset();
+            
+            // main game logic all triggered here by key-up
+            document.onkeyup = function(event) {
+            
+                // var containting the letter on the key pressed
+                var guess = event.key;
+
+                console.log(secretLetter);
 
 
-            for (g = 9; g > 0; g--) {
-                if (guess == secretLetter)
-                {
-                    wins++;
-                    reset();
-                    break;
+                for (g = 9; g > 0; g--) {
+                    if (guess == secretLetter)
+                    {
+                        wins++;
+                        reset();
+                        break;
+                    }
+                    else if (guessesLeft == 0)
+                    {
+                        losses++;
+                        reset();
+                        break;
+                    }
+                    else 
+                    {
+                        guessesLeft--;
+                        break;
+                    }
                 }
-                else if (guessesLeft == 0)
-                {
-                    losses++;
-                    reset();
-                    break;
-                }
-                else 
-                {
-                    guessesLeft--;
-                    break;
-                }
+
+                guessedLetters.push(" " + guess);
+
+                scorecard();
+
             }
-
-            guessedLetters.push(" " + guess);
-
-            scorecard();
 
         }
 
