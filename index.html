@@ -27,8 +27,10 @@
         //array of letters the program will choose from
         var alphabet = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"]
         
-        // picks a word from the array via a random index number
+        // picks a letter from the array via a random index number
         var letter = alphabet[Math.floor(Math.random() * alphabet.length)];
+
+        var secretLetter = letter;
 
         // vars keeping track of the number of wins, losses and unused guesses
         var wins = 0;
@@ -38,21 +40,51 @@
         // array for letters already guessed by the user
         var guessedLetters = [ ];
 
-       
-        document.onkeyup = function(event) 
-            {
-                var guess = event.key;
+        // function for keeping track of the various numbers
+        function scorecard() {
+            document.getElementById('wins').innerHTML = wins;
+            document.getElementById('losses').innerHTML = losses;
+            document.getElementById('guessesLeft').innerHTML = (" " + guessesLeft);
+            document.getElementById('guessLog').innerHTML = (" " + guessedLetters);
+        }
+        
+        scorecard();
 
-                guessedLetters.push(" " + guess);
 
-                guessesLeft--;
+        // game logic triggered by key-up
+        document.onkeyup = function(event) {
+        
+            // var containting the letter on the key pressed
+            var guess = event.key;
 
-                document.getElementById('wins').innerHTML = wins;
-                document.getElementById('losses').innerHTML = losses;
-                document.getElementById('guessesLeft').innerHTML = (" " + guessesLeft);
-                document.getElementById('guessLog').innerHTML = (" " + guessedLetters);
-                
+            console.log(secretLetter);
+
+
+            for (g = 9; g > 0; g--) {
+                if (guess == secretLetter)
+                {
+                    wins++;
+                    guessesLeft = 9;
+                    break;
+                }
+                else if (guessesLeft == 0)
+                {
+                    losses++;
+                    guessesLeft = 9;
+                    break;
+                }
+                else 
+                {
+                    guessesLeft--;
+                    break;
+                }
             }
+
+            guessedLetters.push(" " + guess);
+
+            scorecard();
+
+        }
 
 
     </script>
