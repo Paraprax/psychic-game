@@ -47,11 +47,20 @@
             document.getElementById('guessesLeft').innerHTML = (" " + guessesLeft);
             document.getElementById('guessLog').innerHTML = (" " + guessedLetters);
         }
+
+        // function for resetting scores and clearing the guessedLetters array
+        function reset () {
+            guessesLeft = 9;
+            guessedLetters = [];
+            scorecard();
+        }
+
+
+        // ~~~~ actual game logic begins here ~~~~ 
+
+        reset();
         
-        scorecard();
-
-
-        // game logic triggered by key-up
+        // main game function triggered by key-up
         document.onkeyup = function(event) {
         
             // var containting the letter on the key pressed
@@ -64,13 +73,13 @@
                 if (guess == secretLetter)
                 {
                     wins++;
-                    guessesLeft = 9;
+                    reset();
                     break;
                 }
                 else if (guessesLeft == 0)
                 {
                     losses++;
-                    guessesLeft = 9;
+                    reset();
                     break;
                 }
                 else 
