@@ -45,20 +45,18 @@
             document.getElementById('guessLog').innerHTML = (" " + guessedLetters);
         }
 
-
-        var letter = alphabet[Math.floor(Math.random() * alphabet.length)];
-
-        var secretLetter = letter;
+        var letter;
+        var secretLetter;
 
         // function for resetting scores and clearing the guessedLetters array
         function reset () {
             guessesLeft = 9;
             guessedLetters = [];
+            letter = alphabet[Math.floor(Math.random() * alphabet.length)]; // picking a letter from the array via a random index number
+            secretLetter = letter;
             scorecard();
         }
-        
-        // function for picking a letter from the array via a random index number
-        
+
 
         // ~~~~ actual game function begins here ~~~~ 
         
