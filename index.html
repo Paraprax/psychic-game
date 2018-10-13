@@ -51,10 +51,15 @@
         // function for resetting scores and clearing the guessedLetters array
         function reset () {
             guessesLeft = 9;
-            guessedLetters = [];
+            // guessedLetters = [];
+            while (guessedLetters.length > 0) {
+                guessedLetters.pop();
+            }
+            console.log(guessedLetters.length);
+            scorecard();
             letter = alphabet[Math.floor(Math.random() * alphabet.length)]; // picking a letter from the array via a random index number
             secretLetter = letter;
-            scorecard();
+            
         }
 
 
@@ -72,29 +77,26 @@
                 var guess = event.key;
 
                 console.log(secretLetter);
-
-
-                for (g = 9; g > 0; g--) {
+                
                     if (guess == secretLetter)
                     {
                         wins++;
                         reset();
-                        break;
+                      
                     }
                     else if (guessesLeft == 0)
                     {
                         losses++;
                         reset();
-                        break;
+                        
                     }
                     else 
                     {
                         guessesLeft--;
-                        break;
+                        guessedLetters.push(" " + guess);
+                       
                     }
-                }
 
-                guessedLetters.push(" " + guess);
 
                 scorecard();
 
